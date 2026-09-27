@@ -1,0 +1,24 @@
+name: 24/7 Minecraft Aternos Bot
+
+on:
+  schedule:
+    - cron: '*/15 * * * *' # यह बोट को हर 15 मिनट में चेक करके एक्टिव रखेगा
+  workflow_dispatch: # इससे आप खुद भी जब चाहें बटन दबाकर बोट चालू कर सकते हैं
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+
+    - name: Install Dependencies
+      run: npm install mineflayer
+
+    - name: Run Minecraft Bot
+      run: node bot.js
